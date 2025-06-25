@@ -46,12 +46,6 @@ npm install
 
 ## ⚙️ 백엔드 (Backend)
 
-###  디렉토리 이동
-
-```bash
-cd /home/ubuntu/lucky_casino_backend
-```
-
 ###  개발 환경 설정
 
 ```bash
