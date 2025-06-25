@@ -13,7 +13,7 @@ npm run dev
 pnpm run dev
 ```
 
-# 개발 서버 실행 (외부 접속 허용)
+### 개발 서버 실행 (외부 접속 허용)
 npm run dev
 
 ### 빌드 및 배포
