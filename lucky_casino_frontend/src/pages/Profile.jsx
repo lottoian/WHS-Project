@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Coins, CalendarDays, User, Mail, TrendingUp } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Gamepad2, Coins, User, Mail, CalendarDays, TrendingUp, Settings, Lock, LogOut, Trophy, Award, Clock, Info, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Profile = ({ user }) => {
