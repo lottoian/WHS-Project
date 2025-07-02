@@ -23,18 +23,56 @@ const Home = ({ user }) => {
           안전한 환경에서 게임 머니로 다양한 베팅 게임을 즐겨보세요.
         </p>
         {!user && (
-          <div className="space-x-4">
-            <Link to="/register">
-              <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black">
-                지금 시작하기
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10">
-                로그인
-              </Button>
-            </Link>
-          </div>
+          <>
+            <div className="space-x-4">
+              <Link to="/register">
+                <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black">
+                  지금 시작하기
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10">
+                  로그인
+                </Button>
+              </Link>
+            </div>
+            {/* 배너 영역 */}
+            <div className="flex flex-wrap flex-col items-center gap-4 mt-8">
+              <div className="flex justify-center gap-4">
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너1.png" alt="배너1" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너2.png" alt="배너2" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너3.png" alt="배너3" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+              </div>
+              <div className="flex justify-center gap-4">
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너4.png" alt="배너4" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너5.png" alt="배너5" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너6.png" alt="배너6" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+              </div>
+              <div className="flex justify-center gap-4">
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너7.png" alt="배너7" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너8.png" alt="배너8" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+                <a href="https://github.com/lottoian/WHS-Project/tree/main" target="_blank" rel="noopener noreferrer">
+                  <img src="/배너9.png" alt="배너9" className="h-24 rounded-lg shadow-lg hover:scale-105 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </>
         )}
       </div>
 
