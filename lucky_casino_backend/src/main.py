@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////home/ubuntu/lucky_casino_backend/src/database/app.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///src/database/app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "super-secret-key") # .env 파일에서 SECRET_KEY 로드
 
