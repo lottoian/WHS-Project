@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-export default function Charge() {
-  const location = useLocation()
-  const user = location.state?.user
+export default function Charge({ user }) {
   const [amount, setAmount] = useState(0)
   const [showModal, setShowModal] = useState(false)
   const presetAmounts = [10000, 30000, 50000, 100000]
@@ -39,7 +37,7 @@ export default function Charge() {
     if (res.data.status === 'ok') {
       alert('입금 신청이 완료되었습니다. 관리자가 확인 후 승인할 예정입니다.')
       setShowModal(false)
-      navigate('/dashboard', { state: { user } })
+      navigate('/')
     } else {
       alert('신청에 실패했습니다. 다시 시도해주세요.');
     }

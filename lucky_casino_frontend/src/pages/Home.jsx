@@ -134,13 +134,19 @@ const Home = ({ user }) => {
           <h2 className="text-2xl font-bold text-white mb-6">
             안녕하세요, {user.username}님!
           </h2>
-          <div className="grid md:grid-cols-4 gap-4">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">
-                {user.game_money?.toLocaleString()}원
-              </div>
-              <div className="text-gray-300">보유 게임 머니</div>
+          <div className="flex flex-wrap items-center gap-4 mb-4">
+            <div className="flex items-center text-white text-lg font-semibold">
+              <Coins className="h-5 w-5 text-yellow-400 mr-1" />
+              {user.game_money?.toLocaleString()}원
             </div>
+            <Link to="/charge">
+              <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+                충전/환전
+              </Button>
+            </Link>
+            {/* 로그아웃 버튼은 Navbar에 있으므로 여기선 생략 */}
+          </div>
+          <div className="grid md:grid-cols-4 gap-4">
             <Link to="/betting" className="block">
               <Button className="w-full bg-purple-600 hover:bg-purple-700">
                 <Gamepad2 className="h-4 w-4 mr-2" />

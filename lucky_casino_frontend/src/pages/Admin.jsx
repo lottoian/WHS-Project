@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-export default function Admin() {
+export default function Admin({ user }) {
+  const navigate = useNavigate()
   const [deposits, setDeposits] = useState([])
   const [withdrawals, setWithdrawals] = useState([])
   const [stats, setStats] = useState(null)
@@ -128,10 +130,10 @@ export default function Admin() {
     <div className="h-screen p-4 bg-gray-100 relative"> 
       <div className="fixed top-0 right-0 m-4 z-50">
         <button
-          onClick={() => window.location.href = '/chargelogin'}
+          onClick={() => navigate('/')}
           className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow-lg"
         >
-          로그아웃
+          홈으로
         </button>
       </div>
       <div className="grid grid-cols-2 grid-rows-2 gap-4 h-full">

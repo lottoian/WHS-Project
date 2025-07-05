@@ -8,6 +8,8 @@ import Register from './pages/Register';
 import Board from './pages/Board';
 import Betting from './pages/Betting';
 import Profile from './pages/Profile';
+import Charge from './pages/Charge';
+import Admin from './pages/Admin';
 import './App.css';
 
 // Axios 기본 설정
@@ -16,6 +18,11 @@ axios.defaults.withCredentials = true; // CORS 문제 해결을 위해 필요
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  console.log('App 렌더링됨, user:', user);
+
+  useEffect(() => {
+    console.log('user:', user);
+  }, [user]);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -50,6 +57,8 @@ function App() {
             <Route path="/board/:type" element={<Board user={user} />} />
             <Route path="/betting" element={<Betting user={user} setUser={setUser} />} />
             <Route path="/profile" element={<Profile user={user} />} />
+            <Route path="/charge" element={<Charge user={user} />} />
+            <Route path="/admin" element={<Admin user={user} />} />
           </Routes>
         </div>
       </div>

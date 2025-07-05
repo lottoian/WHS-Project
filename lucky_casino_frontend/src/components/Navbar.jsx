@@ -53,18 +53,6 @@ const Navbar = ({ user, setUser }) => {
               <Coins className="h-5 w-5 text-yellow-400 mr-1" />
               {user.game_money?.toLocaleString()}원
             </div>
-            <Button
-              onClick={() => {
-                if (user.username === 'admin') {
-                  navigate('/admin', { state: { user } });
-                } else {
-                  navigate('/charge', { state: { user } });
-                }
-              }}
-              className="bg-blue-500 hover:bg-blue-600 text-white"
-            >
-              충전/환전
-            </Button>
             <Button onClick={handleLogout} variant="outline" className="text-white border-white/20 hover:bg-white/10">
               로그아웃
             </Button>
