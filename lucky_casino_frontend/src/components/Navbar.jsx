@@ -43,6 +43,11 @@ const Navbar = ({ user, setUser }) => {
               프로필
             </Link>
           )}
+          {user && (
+            <Link to="/chargeorwithdraw" className="text-gray-300 hover:text-white transition-colors ml-2">
+              충전/환전
+            </Link>
+          )}
         </div>
       </div>
 

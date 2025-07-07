@@ -8,7 +8,7 @@ import Register from './pages/Register';
 import Board from './pages/Board';
 import Betting from './pages/Betting';
 import Profile from './pages/Profile';
-import Charge from './pages/Charge';
+import ChargeOrWithdraw from './pages/ChargeOrWithdraw';
 import Admin from './pages/Admin';
 import './App.css';
 
@@ -57,8 +57,8 @@ function App() {
             <Route path="/board/:type" element={<Board user={user} />} />
             <Route path="/betting" element={<Betting user={user} setUser={setUser} />} />
             <Route path="/profile" element={<Profile user={user} />} />
-            <Route path="/charge" element={<Charge user={user} />} />
-            <Route path="/admin" element={<Admin user={user} />} />
+            <Route path="/chargeorwithdraw" element={<ChargeOrWithdraw user={user} />} />
+            <Route path="/approval-process" element={<Admin user={user} />} />
           </Routes>
         </div>
       </div>
