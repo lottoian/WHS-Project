@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PRESET_AMOUNTS = [5000, 10000, 30000, 50000, 100000];
@@ -11,6 +11,27 @@ export default function ChargeOrWithdraw({ user }) {
   const [showChargeModal, setShowChargeModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [chargeHistory, setChargeHistory] = useState([]);
+  const [withdrawHistory, setWithdrawHistory] = useState([]);
+
+  // 내역 불러오기
+  const fetchChargeHistory = async () => {
+    if (!user) return;
+    const res = await axios.post('/api/charge/user-list', { username: user.username });
+    setChargeHistory(res.data);
+  };
+  const fetchWithdrawHistory = async () => {
+    if (!user) return;
+    const res = await axios.post('/api/withdraw/user-list', { username: user.username });
+    setWithdrawHistory(res.data);
+  };
+  useEffect(() => {
+    if (user) {
+      fetchChargeHistory();
+      fetchWithdrawHistory();
+    }
+    // eslint-disable-next-line
+  }, [user]);
 
   // 충전 금액 버튼 클릭
   const handleChargeAdd = (val) => setChargeAmount(prev => prev + val);
@@ -28,15 +49,20 @@ export default function ChargeOrWithdraw({ user }) {
   const confirmCharge = async () => {
     setLoading(true);
     try {
-      await axios.post('/api/charge/request', {
+      const res = await axios.post('/api/charge/request', {
         username: user.username,
         amount: chargeAmount
       });
-      alert('충전 신청 완료!');
-      setChargeAmount(0);
-      setShowChargeModal(false);
+      if (res.data.status === 'ok') {
+        alert('충전 신청 완료!');
+        setChargeAmount(0);
+        setShowChargeModal(false);
+        fetchChargeHistory();
+      } else {
+        alert(res.data.message || '충전 신청 실패');
+      }
     } catch (e) {
-      alert('충전 신청 실패');
+      alert(e.response?.data?.message || '충전 신청 실패');
     } finally {
       setLoading(false);
     }
@@ -51,17 +77,22 @@ export default function ChargeOrWithdraw({ user }) {
   const confirmWithdraw = async () => {
     setLoading(true);
     try {
-      await axios.post('/api/withdraw/request', {
+      const res = await axios.post('/api/withdraw/request', {
         username: user.username,
         amount: withdrawAmount,
         account_number: withdrawAccount
       });
-      alert('환전 신청 완료!');
-      setWithdrawAmount(0);
-      setWithdrawAccount('');
-      setShowWithdrawModal(false);
+      if (res.data.status === 'ok') {
+        alert('환전 신청 완료!');
+        setWithdrawAmount(0);
+        setWithdrawAccount('');
+        setShowWithdrawModal(false);
+        fetchWithdrawHistory();
+      } else {
+        alert(res.data.message || '환전 신청 실패');
+      }
     } catch (e) {
-      alert('환전 신청 실패');
+      alert(e.response?.data?.message || '환전 신청 실패');
     } finally {
       setLoading(false);
     }
@@ -102,6 +133,33 @@ export default function ChargeOrWithdraw({ user }) {
             onClick={handleCharge}
             disabled={loading}
           >충전</button>
+          {/* 충전 내역 테이블 */}
+          <div className="mt-6">
+            <h3 className="text-lg font-bold mb-2 text-black">충전 내역</h3>
+            <table className="w-full text-black text-sm">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="p-1 border">번호</th>
+                  <th className="p-1 border">금액</th>
+                  <th className="p-1 border">상태</th>
+                  <th className="p-1 border">신청일시</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chargeHistory.map((c) => (
+                  <tr key={c.id} className="text-center">
+                    <td className="p-1 border">{c.id}</td>
+                    <td className="p-1 border">{c.amount.toLocaleString()}원</td>
+                    <td className="p-1 border">{c.status}</td>
+                    <td className="p-1 border">{c.created_at}</td>
+                  </tr>
+                ))}
+                {chargeHistory.length === 0 && (
+                  <tr><td colSpan={4} className="text-center text-gray-400">내역 없음</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
@@ -133,6 +191,33 @@ export default function ChargeOrWithdraw({ user }) {
             onClick={handleWithdraw}
             disabled={loading}
           >환전</button>
+          {/* 환전 내역 테이블 */}
+          <div className="mt-6">
+            <h3 className="text-lg font-bold mb-2 text-black">환전 내역</h3>
+            <table className="w-full text-black text-sm">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="p-1 border">번호</th>
+                  <th className="p-1 border">금액</th>
+                  <th className="p-1 border">상태</th>
+                  <th className="p-1 border">신청일시</th>
+                </tr>
+              </thead>
+              <tbody>
+                {withdrawHistory.map((w) => (
+                  <tr key={w.id} className="text-center">
+                    <td className="p-1 border">{w.id}</td>
+                    <td className="p-1 border">{w.amount.toLocaleString()}원</td>
+                    <td className="p-1 border">{w.status}</td>
+                    <td className="p-1 border">{w.created_at}</td>
+                  </tr>
+                ))}
+                {withdrawHistory.length === 0 && (
+                  <tr><td colSpan={4} className="text-center text-gray-400">내역 없음</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

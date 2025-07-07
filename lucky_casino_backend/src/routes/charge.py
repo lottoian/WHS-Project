@@ -29,6 +29,22 @@ def charge_list():
         } for c in charges
     ])
 
+@bp.route('/user-list', methods=['POST'])
+def charge_user_list():
+    data = request.get_json()
+    username = data.get('username')
+    if not username:
+        return jsonify({'status': 'error', 'message': '필수 정보 누락'}), 400
+    charges = db_session.query(Charge).filter_by(username=username).order_by(Charge.created_at.desc()).all()
+    return jsonify([
+        {
+            'id': c.id,
+            'amount': c.amount,
+            'status': c.status,
+            'created_at': c.created_at.strftime('%Y-%m-%d %H:%M')
+        } for c in charges
+    ])
+
 @bp.route('/approve', methods=['POST'])
 def charge_approve():
     data = request.get_json()
