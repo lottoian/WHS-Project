@@ -1,10 +1,10 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, func
-from ..database import Base
+from ..models import db
+from sqlalchemy import func
 
-class Charge(Base):
+class Charge(db.Model):
     __tablename__ = 'charge'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String(64), nullable=False)
-    amount = Column(Integer, nullable=False)
-    created_at = Column(DateTime, default=func.now())
-    status = Column(String(16), default='pending') 
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(64), nullable=False)
+    amount = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=func.now())
+    status = db.Column(db.String(16), default='pending') 

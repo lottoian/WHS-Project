@@ -26,16 +26,22 @@ from models.user import User
 from models.board import BoardPost
 from models.betting import Game, Bet, Transaction
 from models.banner import Banner
+from models.charge import Charge
+from models.withdraw import Withdraw
 
 from routes.auth import auth_bp
 from routes.board import board_bp
 from routes.betting import betting_bp
 from routes.profile import profile_bp
+from routes.charge import bp as charge_bp
+from routes.withdraw import bp as withdraw_bp
 
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
 app.register_blueprint(board_bp, url_prefix='/api/board')
 app.register_blueprint(betting_bp, url_prefix='/api/betting')
 app.register_blueprint(profile_bp, url_prefix='/api/profile')
+app.register_blueprint(charge_bp)
+app.register_blueprint(withdraw_bp)
 
 # [MERGE NOTE] 아래 API들은 app.py에서 main.py로 통합된 것들입니다.
 # 기존 main.py의 SQLAlchemy/Blueprint 구조에 맞게 변환하여 추가합니다.
