@@ -1,4 +1,4 @@
-from ..models import db
+from models import db
 from sqlalchemy import func
 
 class Charge(db.Model):
